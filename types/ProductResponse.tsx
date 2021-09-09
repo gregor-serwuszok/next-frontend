@@ -8,7 +8,7 @@ export type ProductResponse = {
     name: Entity
   }
   locale: Localization
-  pagination: Pagination
+  itemQty: number
   sort: Sort
 
 }

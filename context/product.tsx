@@ -1,7 +1,8 @@
-import { createContext, FC, useState } from "react"
+import { createContext, FC, useContext, useState } from "react"
 import axios from "axios"
 import { ProductResponse } from "../types/ProductResponse"
 import { ProductFetchParams } from "../types/FetchParams"
+import { PaginationContext } from "./pagination"
 
 type ProductContextState = {
   productResponse: ProductResponse
@@ -21,12 +22,14 @@ export const ProductContextProvider: FC = ({ children }) => {
 
   const [state, setState] = useState<ProductContextState>(initial)
 
+  const { updateItemQty, product } = useContext(PaginationContext)
+
   const fetchProducts = async () => {
     setState({ ...state, isFetching: true })
 
     const params: ProductFetchParams = {
-      page: 1,
-      limit: 28,
+      page: product.page,
+      limit: product.limit,
       st: "object",
       sd: "asc",
       sp: "id"
@@ -38,16 +41,19 @@ export const ProductContextProvider: FC = ({ children }) => {
         url: `${process.env.API_BASE_URL}products/grid`,
         params: params
       })
+
+      const { itemQty, locale, resource, sort } = response.data
       setState({
         ...state,
         isFetching: false,
         productResponse: {
-          pagination: response.data.pagination,
-          locale: response.data.locale,
-          resource: response.data.resource,
-          sort: response.data.sort,
+          itemQty: itemQty,
+          locale: locale,
+          resource: resource,
+          sort: sort,
         }
       })
+      updateItemQty("product", itemQty)
     }
     catch (error) {
       console.log(error)

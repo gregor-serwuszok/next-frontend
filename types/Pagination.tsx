@@ -3,4 +3,5 @@ export type Pagination = {
   limit: number
   itemQty: number
   pageQty: number
+  limitOptions: number[]
 }
