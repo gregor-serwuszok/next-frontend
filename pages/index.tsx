@@ -2,9 +2,9 @@ import type { NextPage } from "next"
 import Head from "next/head"
 import Link from "next/link"
 import { useContext } from "react"
-import AppBar from "../components/appBar"
-import Login from "../components/logIn"
-import { AuthContext } from "../context/auth"
+import AppBar from "../src/components/appBar"
+import Login from "../src/components/logIn"
+import { AuthContext } from "../src/context/auth"
 
 const Home: NextPage = () => {
 

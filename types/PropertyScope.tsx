@@ -1,1 +1,0 @@
-export type PropertyScope = "attribute" | "object"

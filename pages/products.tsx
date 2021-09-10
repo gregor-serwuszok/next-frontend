@@ -1,12 +1,13 @@
 import { NextPage } from "next"
 import Head from "next/head"
 import { useContext } from "react"
-import AppBar from "../components/appBar"
-import Login from "../components/logIn"
-import Product from "../components/product"
-import { AuthContext } from "../context/auth"
-import { ConfigContext } from "../context/configuration"
-import { ProductContextProvider } from "../context/product"
+import AppBar from "../src/components/appBar"
+import Login from "../src/components/logIn"
+import Pagination from "../src/components/pagination"
+import Product from "../src/components/product"
+import { AuthContext } from "../src/context/auth"
+import { ConfigContext } from "../src/context/configuration"
+import { ProductContextProvider } from "../src/context/product"
 
 const Products: NextPage = () => {
 
@@ -32,6 +33,7 @@ const Products: NextPage = () => {
             </Head>
             <AppBar />
             <ProductContextProvider>
+              <Pagination entity="product" />
               <Product />
             </ProductContextProvider>
           </>
